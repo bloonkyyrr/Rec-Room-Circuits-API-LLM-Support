@@ -132,6 +132,7 @@ import { circuit } from "./Source/assets/js/Modules/circuit.mjs";
 import fs from "fs";
 // circuit.mjs uses fetch(); in Node point it at the file:
 globalThis.fetch = async (u) => ({ ok: true, json: async () => JSON.parse(fs.readFileSync("./Source/" + u, "utf8")) });
+await circuit.loadIndex();   // required: compile() throws "Chip index not loaded" without it
 const doc = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
 const out = await circuit.compile(doc);
 console.log(out.ok ? "OK" : "ERRORS", out.errors, out.warnings, out.stats);

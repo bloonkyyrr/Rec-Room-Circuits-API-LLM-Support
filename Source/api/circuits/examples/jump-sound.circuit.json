@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "title": "Jump sound",
+  "notes": "The local player's jump event fires the Audio Player once. Drop your sound onto the board's Audio input.",
+  "nodes": [
+    { "id": "jump", "chip": "Event Receiver", "label": "On Local Player Jumped" },
+    { "id": "sound", "chip": "Audio Player", "label": "Jump sound" }
+  ],
+  "links": [
+    ["jump._", "sound.Play"]
+  ],
+  "auto": false
+}
