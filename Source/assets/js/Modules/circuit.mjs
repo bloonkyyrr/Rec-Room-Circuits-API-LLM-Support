@@ -90,6 +90,14 @@ export const circuit = {
 			const id = slug(c.label);
 			const cats = norm((c.cat || []).join(" "));
 			const desc = norm(c.desc);
+			const ports = norm((c.sections || []).flatMap((section) => [...(section.in || []), ...(section.out || [])]).join(" "));
+			const additions = norm(
+				[
+					...(c.eventOptionsAdded || []),
+					...(c.configurationOptionsAdded || []),
+					...(c.updates || []).map((update) => update.note || ""),
+				].join(" "),
+			);
 			let score = 0;
 
 			if (label === q || id === q) score += 1000;
@@ -97,6 +105,8 @@ export const circuit = {
 			if (cats.includes(q)) score += 120;
 			if (tokens.every((t) => label.includes(t))) score += 200;
 			if (tokens.every((t) => desc.includes(t) || cats.includes(t))) score += 60;
+			if (tokens.every((t) => label.includes(t) || desc.includes(t) || cats.includes(t) || ports.includes(t) || additions.includes(t))) score += 60;
+			if (tokens.some((t) => ports.includes(t) || additions.includes(t))) score += 12;
 			if (tokens.some((t) => label.includes(t))) score += 40;
 			if (tokens.some((t) => desc.includes(t))) score += 12;
 			if (c.flags?.includes("hidden")) score -= 25;
@@ -113,9 +123,10 @@ export const circuit = {
 	   copy of it, so rebuild the fields it reads. */
 	toChipObject(entry) {
 		if (!entry) return null;
+		const paletteName = entry.paletteName || entry.label;
 		return {
-			chipName: entry.label,
-			paletteName: entry.label,
+			chipName: paletteName,
+			paletteName,
 			description: entry.desc,
 			isObjectBoard: entry.kind === "object",
 			isBetaChip: entry.flags?.includes("beta") || false,

@@ -17,11 +17,11 @@
 | | |
 | --- | --- |
 | **[Circuit Builder](https://pckydev.github.io/Rec-Room-Circuits-API/builder.html)** — `Source/builder.html` | Describe a circuit, get the chips to place, every wire in order with both port names, and the values to type in. |
-| **Chip index** — `Source/api/circuits/chips.index.json` | 1358 chips and object boards with every port's name and type. Small enough for a model to hold, complete enough to compile against. |
+| **Chip index** — `Source/api/circuits/chips.index.json` | 1,319 exported chip variants, 19 documented-only chips, and 46 object boards (1,384 indexed entries) with every port's name and type. |
 | **Skill for agents** — `.agents/skills/rec-room-circuits/SKILL.md` | The circuit document format, port addressing and wire rules, for an LLM writing circuits. Published copy: `Source/skill/SKILL.md`. |
 | **MCP server** — `Tools/mcp/server.mjs` | The same thing over [MCP](https://modelcontextprotocol.io): search, compose, repair and preview, driven by an agent. |
 | **Graph editor** — `Source/index.html` | The original palette + graph editor with the full chip renderer. |
-| **Data** — `Circuits Data/` | The raw exporter dumps, plus chips added since they were exported. |
+| **Data** — `Circuits Data/` | Raw exporter dumps, documented-only chips, and sourced official updates since the dumps. |
 | **Tools** — `Tools/*.py` | Rebuild the index; diff it against the community chip docs. |
 
 Nothing here imports anything into Rec Room. The output is a diagram and a checklist — you place the
@@ -145,13 +145,16 @@ The skill knows what to build; the [MCP server](#mcp-server) builds it. Give an 
 `Circuits Data/CV2_ChipConfigs.json` and `CV2_ObjectConfigs.json` are exporter dumps — about 2.5 MB,
 with far more detail than a model or a page needs. `Source/api/circuits/chips.index.json` is the
 trimmed, LLM-facing version: name, category, short description, true flags, and each section's
-ports as `"Name:Type"`.
+ports as `"Name:Type"`. The builder preserves distinct duplicate-name signatures, including
+Rooms 1/Rooms 2 and deprecated variants, instead of overwriting them.
 
 Chips added to the game after the dumps were exported are documented on
 [circuits.pages.dev](https://circuits.pages.dev/docs/category/chips).
 `Tools/build_docs_supplement.py` diffs that site against the dumps and writes
 `Circuits Data/CV2_Docs_Supplement.json`; `Tools/build_chip_index.py` merges it in, marking those
-entries with a `prov` field and a `similar` hint when an older local chip has a near-identical name.
+entries with a `prov` field, room availability flags, and a `similar` hint when an older local chip
+has a near-identical name. `Circuits Data/CV2_Official_Updates.json` records post-export changes
+from Rec Room Ship Notes, including added ports and selectable event/configuration options.
 
 After a game update:
 

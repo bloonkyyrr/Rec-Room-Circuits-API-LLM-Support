@@ -8,8 +8,9 @@
 ## Start here
 
 - [LLM skill](skill/SKILL.md): how to turn a request into a valid circuit document. Read this first.
-- [Chip index](api/circuits/chips.index.json): 1328 chips and 46 object boards with every port
-  name and type. ~505 KB — search it, do not read it whole.
+- [Chip index](api/circuits/chips.index.json): 1,319 exported chip variants, 19 documented-only
+  chips, and 46 object boards (1,384 entries) with every port name and type. ~530 KB — search it,
+  do not read it whole.
 - [Circuit schema](api/circuits/schema.json): JSON Schema for the circuit document.
 - [Example plan](api/circuits/examples/sliding-door.circuit.json): a trigger volume, a sequence,
   a notification and a piston.
@@ -24,6 +25,8 @@
 
 - [Raw chip dump](../Circuits%20Data/CV2_ChipConfigs.json): exporter output, ~2.5 MB.
 - [Raw object dump](../Circuits%20Data/CV2_ObjectConfigs.json): object boards, ~170 KB.
+- [Official post-export changes](../Circuits%20Data/CV2_Official_Updates.json): port, event,
+  and configuration-option updates from Rec Room Ship Notes.
 
 ## Limits
 

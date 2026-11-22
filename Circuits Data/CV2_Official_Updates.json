@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "updates": [
+    {
+      "chip": "Event Receiver",
+      "date": "2025-12-01",
+      "url": "https://recroom.com/ship-notes/2025/12/1/-rec-room-update-the-winter-wonderland-25-edition",
+      "addEventOptions": [
+        "Avatar Item Gifted",
+        "Key Gifted",
+        "Currency Gifted",
+        "Consumable Gifted"
+      ],
+      "note": "Added four gifting event selections to circuits."
+    },
+    {
+      "chip": "Get Room Details",
+      "date": "2026-01-21",
+      "url": "https://recroom.com/ship-notes/2026/1/21/rec-room-update-the-backpacks-boosts-and-dodge-bombs-edition",
+      "addOutputs": {
+        "Get Room Details": [
+          "Room Boost Count:int"
+        ]
+      },
+      "note": "Added the Room Boost Count output; recorded as int to match the other room boost count chips."
+    },
+    {
+      "chip": "Player Outfit Slot Flag Constant",
+      "date": "2026-01-21",
+      "url": "https://recroom.com/ship-notes/2026/1/21/rec-room-update-the-backpacks-boosts-and-dodge-bombs-edition",
+      "addConfigurationOptions": [
+        "Leg",
+        "Feet"
+      ],
+      "note": "Added Leg and Feet outfit slot options."
+    },
+    {
+      "chip": "Music Constant",
+      "date": "2026-02-09",
+      "url": "https://recroom.com/ship-notes/2026/2/9/rec-room-update-the-disco-dodgeball-edition",
+      "note": "Additional music audio selections were added; the release notes do not name them individually."
+    },
+    {
+      "chip": "SFX Constant",
+      "date": "2026-02-09",
+      "url": "https://recroom.com/ship-notes/2026/2/9/rec-room-update-the-disco-dodgeball-edition",
+      "note": "Additional SFX audio selections were added; the release notes do not name them individually."
+    }
+  ]
+}

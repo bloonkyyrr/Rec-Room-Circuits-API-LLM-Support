@@ -42,7 +42,7 @@ so several clients can run at once.
 
 | Tool | What it does |
 | --- | --- |
-| `search_chips` | Search 1328 chips + 46 object boards by name, description or category. Optional `kind: "chip" \| "object"`. |
+| `search_chips` | Search indexed chip variants, 19 documented-only chips, and 46 object boards by name, ports, description, event choices, configuration updates, or category. Optional `kind: "chip" \| "object"`. |
 | `get_chip` | Every section, input and output of one chip, with types, flags and provenance. |
 | `list_recipes` | The eight offline patterns and the keywords each matches. |
 | `build_circuit` | `prompt` (plain language) or `circuit` (a document) → compiles, auto-connects, repairs, returns the plan, the exact document, and a preview URL. |

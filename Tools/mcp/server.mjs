@@ -178,14 +178,19 @@ const chipLine = (c) => {
 		})
 		.join(" | ");
 	const flags = c.flags?.length ? ` flags=${c.flags.join(",")}` : "";
-	return `${c.label} (${c.kind})${flags}${c.cat?.length ? ` · ${c.cat.join(" / ")}` : ""}\n    ${c.desc || "no description"}\n    ${ports}`;
+	const metadata = [];
+	if (c.paletteName && c.paletteName !== c.label) metadata.push(`palette name in game=${c.paletteName}`);
+	if (c.eventOptionsAdded?.length) metadata.push(`new event choices=${c.eventOptionsAdded.join(", ")}`);
+	if (c.configurationOptionsAdded?.length) metadata.push(`new configuration choices=${c.configurationOptionsAdded.join(", ")}`);
+	if (c.updates?.length) metadata.push(...c.updates.map((update) => `${update.date}: ${update.note}`));
+	return `${c.label} (${c.kind})${flags}${c.cat?.length ? ` · ${c.cat.join(" / ")}` : ""}\n    ${c.desc || "no description"}\n    ${ports}${metadata.map((line) => `\n    ${line}`).join("")}`;
 };
 
 const TOOLS = [
 	{
 		name: "search_chips",
 		description:
-			"Search the Rec Room CV2 chip index (1328 chips + 46 object boards) by name, description or category. Use this before naming a chip in a circuit — every chip name must exist in the index.",
+			"Search the Rec Room CV2 chip index by name, ports, description, category, event choices or documented configuration updates. Use this before naming a chip in a circuit — every chip name must exist in the index.",
 		inputSchema: {
 			type: "object",
 			properties: {
@@ -374,7 +379,7 @@ async function handle(message) {
 			serverInfo: SERVER_INFO,
 			instructions: [
 				"Rec Room CV2 Circuit Builder. Workflow: search_chips to find real chip names, build_circuit with a plain-language prompt (quick patterns) or with a circuit document (full control), then show the returned preview URL.",
-				`Index: ${counts.chips} chips + ${counts.objects} object boards (${counts.documented || 0} from the community docs).`,
+				`Index: ${counts.chips} exported chip variants + ${counts.documented || 0} documented-only chips + ${counts.objects} object boards (${counts.total} indexed entries).`,
 				"Ports are addressed by in-game names: \"zone.Player Entered\", \"lamp.Turn On\", \"total.out2\", \"_\" for an unnamed exec port. Output is a wiring plan to rebuild by hand — nothing is imported into the game.",
 			].join("\n"),
 		});

@@ -20,9 +20,10 @@ There is no export to the game. Nothing here changes a room. It is a diagram plu
 
 | What | Where |
 | --- | --- |
-| Compact chip index (1328 chips + 46 object boards + 19 documented-only) | `api/circuits/chips.index.json` |
+| Compact chip index (1,319 exported chip variants + 19 documented-only + 46 object boards; 1,384 entries) | `api/circuits/chips.index.json` |
 | Raw exporter dumps | `../Circuits Data/CV2_ChipConfigs.json`, `CV2_ObjectConfigs.json` |
 | Chips newer than the dumps | `../Circuits Data/CV2_Docs_Supplement.json` (from circuits.pages.dev) |
+| Official changes newer than the dumps | `../Circuits Data/CV2_Official_Updates.json` (Rec Room Ship Notes) |
 | Document schema | `api/circuits/schema.json` |
 | Worked example | `api/circuits/examples/sliding-door.circuit.json` |
 | Renderer page | `builder.html` |
@@ -42,9 +43,15 @@ Room Door, Point Light, Piston, Text, Interaction Volume…). `flags` only lists
 `hidden` and `deprecated` should be avoided unless the user asks for them.
 
 Some entries carry a `prov` field: those chips are newer than the exporter dumps and their
-ports were taken from the community docs at circuits.pages.dev. Use them normally — the ports
-are real — but if a `prov.similar` chip name is listed, that older local chip may be the one
-you meant (e.g. `Set Game HUD Element Label` vs `Set HUD Element Label`).
+ports and room availability were taken from the community docs at circuits.pages.dev. Use them
+normally — the ports are real — but if a `prov.similar` chip name is listed, that older local chip
+may be the one you meant (e.g. `Set Game HUD Element Label` vs `Set HUD Element Label`).
+
+Duplicate palette names can have different Rooms 1 and Rooms 2 ports. A suffix such as
+`(Rooms 2)` or `(Deprecated)` is an index disambiguator; `paletteName` retains the exact in-game
+palette label. The unsuffixed form is the Rooms 1 variant when the source defines a distinct
+Rooms 1 form. The index also records official post-export outputs, event choices, and configuration
+options in `updates`, `eventOptionsAdded`, and `configurationOptionsAdded`.
 
 **Do not guess chip names.** Verify every one against the index, e.g.:
 

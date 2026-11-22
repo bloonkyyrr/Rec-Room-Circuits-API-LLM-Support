@@ -22,6 +22,45 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 
 const dirKey = (dir) => (dir === "out" ? "outputs" : "inputs");
 
+const PORT_WIRE_COLORS = {
+	exec: "#ff7640",
+	player: "#ffc93f",
+	quaternion: "#ffc93f",
+	vector3: "#ffc93f",
+	float: "#4e90ff",
+	bool: "#ff3b4b",
+	string: "#9d64ff",
+	object: "#f6c041",
+	dictionary: "#f6c041",
+	int: "#64a768",
+	color: "#4f60de",
+	any: "#fffee8",
+};
+
+function isTransparentColor(value) {
+	const color = String(value ?? "").trim().toLowerCase();
+	if (!color || color === "transparent" || color === "rgba(0, 0, 0, 0)" || color === "rgba(0,0,0,0)") return true;
+	const rgba = color.match(/^rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\s*\)$/);
+	return !!rgba && Number(rgba[1]) === 0;
+}
+
+function wireColor(portEl) {
+	if (!portEl) return "#b7c7ff";
+	const styles = getComputedStyle(portEl);
+
+	/* The preview can be scaled far below 1×. Resolve the chip's semantic port
+	   class to the same palette as port-colors.css so thin wires never inherit a
+	   transparent or near-black default from the browser. */
+	for (const name of portEl.classList) {
+		if (name.startsWith("p-") && PORT_WIRE_COLORS[name.slice(2)]) return PORT_WIRE_COLORS[name.slice(2)];
+	}
+
+	for (const candidate of [styles.getPropertyValue("--port-color"), styles.backgroundColor, styles.borderTopColor, styles.color]) {
+		if (!isTransparentColor(candidate)) return candidate;
+	}
+	return "#b7c7ff";
+}
+
 /* Same port-id scheme the editor uses: the k-th .port in DOM order is
    "port-k", and each mapped port keeps a reference to it on the nodeDesc. */
 function mapPorts(root, nodeDescs) {
@@ -166,18 +205,17 @@ export const circuitView = {
 			}
 			const a = center(fromEl, scalerRect);
 			const b = center(toEl, scalerRect);
-			const color =
-				getComputedStyle(fromEl).backgroundColor ||
-				getComputedStyle(fromEl).borderColor ||
-				"#b7c7ff";
+			const color = wireColor(fromEl) || wireColor(toEl);
 
 			const path = document.createElementNS(SVG_NS, "path");
 			path.setAttribute("d", bezier(a, b));
 			path.setAttribute("fill", "none");
 			path.setAttribute("stroke", color);
-			path.setAttribute("stroke-width", "2.5");
+			path.setAttribute("stroke-width", "2.25");
 			path.setAttribute("stroke-linecap", "round");
-			path.setAttribute("opacity", link.origin === "auto" ? "0.55" : "0.95");
+			path.setAttribute("stroke-linejoin", "round");
+			path.setAttribute("vector-effect", "non-scaling-stroke");
+			path.setAttribute("opacity", link.origin === "auto" ? "0.82" : "0.96");
 			if (link.origin === "auto") path.setAttribute("stroke-dasharray", "7 5");
 			svg.appendChild(path);
 			link.path = path;

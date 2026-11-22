@@ -16,7 +16,10 @@
     "HUD"
    ],
    "desc": "Override all Game HUD Element properties using default values from Game HUD Element Constant input",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -47,7 +50,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -78,7 +84,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -109,7 +118,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -140,7 +152,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -172,6 +187,7 @@
    ],
    "desc": "Request that the local player begin to wall run. Not affected by CanWallRun directly. If you want that property to…",
    "flags": [
+    "r2",
     "beta"
    ],
    "sections": [
@@ -206,6 +222,8 @@
    ],
    "desc": "",
    "flags": [
+    "r1",
+    "r2",
     "beta"
    ],
    "sections": [
@@ -239,7 +257,9 @@
     "Wall Run"
    ],
    "desc": "Gets the whether the player can Wall Run. Enforced via circuits.",
-   "flags": [],
+   "flags": [
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -270,7 +290,9 @@
     "Wall Run"
    ],
    "desc": "Sets the whether the player can Wall Run. Enforced via circuits.",
-   "flags": [],
+   "flags": [
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -301,7 +323,10 @@
     "Projectile Launcher"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -331,7 +356,10 @@
     "Projectile Launcher"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -361,7 +389,10 @@
     "Projectile Launcher"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -393,7 +424,10 @@
     "Projectile Launcher"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -426,7 +460,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -459,7 +496,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -492,7 +532,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -525,7 +568,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -558,7 +604,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",
@@ -591,7 +640,10 @@
     "HUD"
    ],
    "desc": "",
-   "flags": [],
+   "flags": [
+    "r1",
+    "r2"
+   ],
    "sections": [
     {
      "name": "",

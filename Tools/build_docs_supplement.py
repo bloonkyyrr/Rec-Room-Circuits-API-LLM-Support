@@ -208,7 +208,15 @@ def entry(doc: dict, labels: list[str]) -> dict:
     desc = doc["desc"]
     if len(desc) > DESC_LIMIT:
         desc = desc[:DESC_LIMIT].rsplit(" ", 1)[0].rstrip(" ,.;:") + "…"
-    flags = [f for f, on in (("beta", doc["beta"]), ("troll", doc["troll"]), ("role", doc["role"])) if on]
+    rooms = {
+        "Available everywhere": ("r1", "r2"),
+        "Rooms V1 only": ("r1",),
+        "Rooms V2 only": ("r2",),
+    }.get(doc["availability"], ())
+    flags = [
+        *rooms,
+        *(f for f, on in (("beta", doc["beta"]), ("troll", doc["troll"]), ("role", doc["role"])) if on),
+    ]
     near = difflib.get_close_matches(doc["name"], labels, n=1, cutoff=0.86)
     item = {
         "id": slug(doc["name"]),
