@@ -18,7 +18,7 @@
 | --- | --- |
 | **[Circuit Builder](https://pckydev.github.io/Rec-Room-Circuits-API/builder.html)** — `Source/builder.html` | Describe a circuit, get the chips to place, every wire in order with both port names, and the values to type in. |
 | **Chip index** — `Source/api/circuits/chips.index.json` | 1358 chips and object boards with every port's name and type. Small enough for a model to hold, complete enough to compile against. |
-| **Skill for agents** — `Source/skill/SKILL.md` | The circuit document format, port addressing and wire rules, for an LLM writing circuits. |
+| **Skill for agents** — `.agents/skills/rec-room-circuits/SKILL.md` | The circuit document format, port addressing and wire rules, for an LLM writing circuits. Published copy: `Source/skill/SKILL.md`. |
 | **MCP server** — `Tools/mcp/server.mjs` | The same thing over [MCP](https://modelcontextprotocol.io): search, compose, repair and preview, driven by an agent. |
 | **Graph editor** — `Source/index.html` | The original palette + graph editor with the full chip renderer. |
 | **Data** — `Circuits Data/` | The raw exporter dumps, plus chips added since they were exported. |
@@ -105,6 +105,40 @@ that draws it. Node 18+, no dependencies, nothing to install.
 
 `build_circuit` also starts a loopback-only static server for the Builder page, so the preview URL
 works as soon as it is returned. The full reference is in [`Tools/mcp/README.md`](Tools/mcp/README.md).
+
+## Skill for agents
+
+`SKILL.md` teaches an agent to write circuits the way this repo reads them — the document shape,
+how ports are addressed, which type combinations compile, and what a plan cannot know. It is plain
+Markdown with YAML frontmatter, so any agent that supports skills can load it.
+
+| Where | What it is |
+| --- | --- |
+| `.agents/skills/rec-room-circuits/SKILL.md` | The project skill — Freebuff loads it automatically in a new chat. |
+| `Source/skill/SKILL.md` | The copy published with the site. Same content. |
+
+The file must open with frontmatter, and its `name` must match the folder it sits in:
+
+```yaml
+---
+name: rec-room-circuits
+description: Turn a plain-language request into a Rec Room Circuits V2 wiring plan, then draw it in the browser.
+---
+```
+
+In Freebuff it is already installed: open a new chat and `rec-room-circuits` appears in that
+chat's skill list, or invoke it directly with `/skill:rec-room-circuits`. To use it in another
+project, or to make it account-wide, put the folder wherever that agent scans skills:
+
+```bash
+mkdir -p .agents/skills/rec-room-circuits
+cp Source/skill/SKILL.md .agents/skills/rec-room-circuits/SKILL.md
+```
+
+Keep the folder named `rec-room-circuits` — the loader compares `name` against the directory name,
+and a loose `SKILL.md` is rejected with *"SKILL.md must open with a YAML frontmatter block."*
+
+The skill knows what to build; the [MCP server](#mcp-server) builds it. Give an agent both.
 
 ## Chip data and the index
 
