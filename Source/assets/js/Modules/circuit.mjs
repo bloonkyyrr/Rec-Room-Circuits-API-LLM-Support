@@ -235,6 +235,12 @@ export const circuit = {
 		if (a === "any" || b === "any") return true;
 		if (a === b) return true;
 
+		/* List<T> is generic in T just like a bare T, so list<t> accepts any list. */
+		const la = a.startsWith("list:") ? a.slice(5) : null;
+		const lb = b.startsWith("list:") ? b.slice(5) : null;
+		if (la !== null && lb !== null) return circuit.typesCompatible(la, lb);
+		if ((la !== null) !== (lb !== null)) return false;
+
 		const ua = unionMembers(a);
 		const ub = unionMembers(b);
 		if (ua && (ua.includes(b) || ua.includes("any"))) return true;
