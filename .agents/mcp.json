@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "rec-room-circuits": {
+      "command": "node",
+      "args": ["K:/Rec room Circuits API LLM support Skill/Rec-Room-Circuits-API-LLM-Support/Tools/mcp/server.mjs"]
+    }
+  }
+}
