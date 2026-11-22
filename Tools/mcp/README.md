@@ -45,10 +45,10 @@ so several clients can run at once.
 | `search_chips` | Search indexed chip variants, 19 documented-only chips, and 46 object boards by name, ports, description, event choices, configuration updates, or category. Optional `kind: "chip" \| "object"`. |
 | `get_chip` | Every section, input and output of one chip, with types, flags and provenance. |
 | `list_recipes` | The eight offline patterns and the keywords each matches. |
-| `build_circuit` | `prompt` (plain language) or `circuit` (a document) → compiles, auto-connects, repairs, returns the plan, the exact document, and a preview URL. |
+| `build_circuit` | `prompt` (plain language) or `circuit` (a document) → compiles, auto-connects, repairs, returns the plan, the exact document, and a preview URL with visible, port-type-coloured wires. |
 | `validate_circuit` | Compile a document and list every error and warning. Cheapest check. |
 | `repair_circuit` | Fix a rough document and say what changed. |
-| `preview_circuit` | Only the preview URL. |
+| `preview_circuit` | Preview URL with visible, port-type-coloured wires. Refresh an already-open page if it shows stale wire styling. |
 
 A circuit document is name-addressed, so no ids or port indices leak into it:
 
@@ -95,6 +95,8 @@ The static server binds `127.0.0.1` only, serves `Source/`, sends `cache-control
 keeps the last 200 built documents in memory under `/mcp/preview/<id>.json`. They disappear when
 the server stops, so a link is for the session that produced it — call `build_circuit` again for
 a fresh one.
+Wires use their semantic port-type colours and a non-scaling stroke to stay visible when the graph
+is fit to the browser view.
 
 ## Notes
 

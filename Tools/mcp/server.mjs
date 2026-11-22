@@ -239,7 +239,7 @@ const TOOLS = [
 	{
 		name: "build_circuit",
 		description:
-			"Build a circuit end to end and return the wiring plan: place these chips, wire these ports in this order, type these values, plus a preview URL that draws it. Pass `prompt` in plain language for the composer (patterns + event/action tables), or pass `circuit` — a document with name-addressed nodes and links — and it is validated and repaired automatically. Returns the exact document that compiled, so you never hand-edit JSON.",
+			"Build a circuit end to end and return the wiring plan: place these chips, wire these ports in this order, type these values, plus a preview URL that draws it with visible, port-type-coloured wires. Pass `prompt` in plain language for the composer (patterns + event/action tables), or pass `circuit` — a document with name-addressed nodes and links — and it is validated and repaired automatically. Returns the exact document that compiled, so you never hand-edit JSON.",
 		inputSchema: {
 			type: "object",
 			properties: {
@@ -316,7 +316,7 @@ const TOOLS = [
 	},
 	{
 		name: "preview_circuit",
-		description: "Return just the preview URL for a circuit (built from a prompt or a document) plus a one-line summary, for dropping straight into a browser panel.",
+		description: "Return the preview URL for a circuit (built from a prompt or a document) plus a one-line summary. The Builder preview uses visible, port-type-coloured wires that remain legible when zoomed out; refresh the page if an already-open preview shows stale styling.",
 		inputSchema: {
 			type: "object",
 			properties: {

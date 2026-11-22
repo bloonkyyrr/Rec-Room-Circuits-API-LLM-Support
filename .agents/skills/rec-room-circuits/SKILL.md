@@ -163,9 +163,16 @@ builder.html?recipe=timed-door
 `?doc=` accepts a same-origin URL/path or inline URL-encoded JSON. Inline JSON is fine up to a
 few KB; past that write a file next to the examples and link it.
 
-The page draws the chips with the site's real chip CSS and colours, labels each wire with the
-destination port, and lists the plan under **Wire it up**: chips to place, wires in order, values
+The page draws the chips with the site's real chip CSS and colours each wire from its port type
+(for example, exec orange, bool red, float blue, and int green). Wire colours come from the
+semantic port classes so transparent or dark browser defaults cannot turn the connections black;
+the stroke also stays legible when the diagram is zoomed out. It labels each wire with the
+destination port and lists the plan under **Wire it up**: chips to place, wires in order, values
 to type. Dashed wires were guessed by `auto` and are marked *guessed*.
+
+When returning a preview, inspect it at the diagram's fit-to-view scale. If connections look black
+or disappear, refresh the preview and check that `Source/assets/js/Modules/circuitView.mjs` maps
+the `.p-*` port classes to visible wire colours and sets a non-scaling stroke before returning it.
 
 ---
 
