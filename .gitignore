@@ -3,5 +3,6 @@
 
 # Circuit documents generated for a one-off preview (builder / LLM output).
 # They are local only: add the path here instead of committing one.
-/Source/api/circuits/examples/jump-sound.circuit.json
-/Source/api/circuits/examples/boop.circuit.json
+/Source/api/circuits/examples/
+/Source/api/circuits/examples/
+/Source/api/circuits/examples/
