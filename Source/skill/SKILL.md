@@ -1,4 +1,11 @@
+---
+name: rec-room-circuits
+description: Turn a plain-language request into a Rec Room Circuits V2 wiring plan — which chips to place, which ports to connect, which literals to type — and draw it in the browser for hand-wiring in game. Use when the task involves Rec Room circuits, CV2 chips, or the Rec-Room-Circuits-API-LLM-Support repo.
+---
+
 # Rec Room Circuits V2 — writing wiring plans
+
+All paths and commands below are relative to `Source/` inside the `Rec-Room-Circuits-API-LLM-Support` repo.
 
 This skill lets an agent turn a plain-language request ("a door that slides open when someone
 walks up") into a **Rec Room Circuits V2 wiring plan**: which chips to place, which ports to
