@@ -1,0 +1,618 @@
+{
+ "generated": "2026-11-22",
+ "source": {
+  "site": "https://circuits.pages.dev",
+  "category": "https://circuits.pages.dev/docs/category/chips",
+  "pages": 910
+ },
+ "chips": {
+  "Game HUD Element Set All Values": {
+   "id": "gamehudelementsetallvalues",
+   "label": "Game HUD Element Set All Values",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "Override all Game HUD Element properties using default values from Game HUD Element Constant input",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud element"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/31295d8e-f416-4c44-b0bd-2eda32200365",
+    "uuid": "31295d8e-f416-4c44-b0bd-2eda32200365",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs."
+   }
+  },
+  "Get Game HUD Element Color": {
+   "id": "getgamehudelementcolor",
+   "label": "Get Game HUD Element Color",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Target:hud constant"
+     ],
+     "out": [
+      "Color:color"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/119d2860-e05c-4140-ba5f-c24139b78652",
+    "uuid": "119d2860-e05c-4140-ba5f-c24139b78652",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Get HUD Element Color.",
+    "similar": "Get HUD Element Color"
+   }
+  },
+  "Get Game HUD Element Label": {
+   "id": "getgamehudelementlabel",
+   "label": "Get Game HUD Element Label",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Target:hud constant"
+     ],
+     "out": [
+      "Label:string"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/98ef89de-7a1b-4043-8071-b5cda41030cd",
+    "uuid": "98ef89de-7a1b-4043-8071-b5cda41030cd",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Get HUD Element Label.",
+    "similar": "Get HUD Element Label"
+   }
+  },
+  "Get Game HUD Element Max Value": {
+   "id": "getgamehudelementmaxvalue",
+   "label": "Get Game HUD Element Max Value",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Target:hud constant"
+     ],
+     "out": [
+      "Max Value:int"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/f59d4537-e8b4-4d19-b29f-d5203ce562af",
+    "uuid": "f59d4537-e8b4-4d19-b29f-d5203ce562af",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Get HUD Element Max Value.",
+    "similar": "Get HUD Element Max Value"
+   }
+  },
+  "Get Game HUD Element Value": {
+   "id": "getgamehudelementvalue",
+   "label": "Get Game HUD Element Value",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Target:hud constant"
+     ],
+     "out": [
+      "Value:int"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/d9cbf25f-01c6-468f-8607-d1dd8317bb2f",
+    "uuid": "d9cbf25f-01c6-468f-8607-d1dd8317bb2f",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Get HUD Element Value.",
+    "similar": "Get HUD Element Value"
+   }
+  },
+  "Locomotion Request Wall Run": {
+   "id": "locomotionrequestwallrun",
+   "label": "Locomotion Request Wall Run",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "Locomotion",
+    "Wall Run"
+   ],
+   "desc": "Request that the local player begin to wall run. Not affected by CanWallRun directly. If you want that property to…",
+   "flags": [
+    "beta"
+   ],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Max Speed:float",
+      "Max Duration (seconds):float",
+      "Gravity Multiplier:float"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/13989690-57a9-432f-b79d-9e8a33c9888b",
+    "uuid": "13989690-57a9-432f-b79d-9e8a33c9888b",
+    "availability": "Rooms V2 only",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Locomotion Request Wall Run Stop.",
+    "similar": "Locomotion Request Wall Run Stop"
+   }
+  },
+  "Player Get Is Custom Footstep Audio Enabled": {
+   "id": "playergetiscustomfootstepaudioenabled",
+   "label": "Player Get Is Custom Footstep Audio Enabled",
+   "kind": "chip",
+   "cat": [
+    "Player"
+   ],
+   "desc": "",
+   "flags": [
+    "beta"
+   ],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Player:player"
+     ],
+     "out": [
+      "Enabled:bool"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/d5a7f0e5-b0ab-4b6d-82d2-cdecade30009",
+    "uuid": "d5a7f0e5-b0ab-4b6d-82d2-cdecade30009",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Player Get Is Custom Footstep Audio Active.",
+    "similar": "Player Get Is Custom Footstep Audio Active"
+   }
+  },
+  "Player Get Wall Run Enabled": {
+   "id": "playergetwallrunenabled",
+   "label": "Player Get Wall Run Enabled",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "Properties",
+    "Locomotion",
+    "Wall Run"
+   ],
+   "desc": "Gets the whether the player can Wall Run. Enforced via circuits.",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Player:player"
+     ],
+     "out": [
+      "Wall Run Enabled:bool"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/ae54528b-eaf4-4247-a49e-29b9acbaf1b5",
+    "uuid": "ae54528b-eaf4-4247-a49e-29b9acbaf1b5",
+    "availability": "Rooms V2 only",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs."
+   }
+  },
+  "Player Set Wall Run Enabled": {
+   "id": "playersetwallrunenabled",
+   "label": "Player Set Wall Run Enabled",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "Properties",
+    "Locomotion",
+    "Wall Run"
+   ],
+   "desc": "Sets the whether the player can Wall Run. Enforced via circuits.",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Player:player",
+      "Wall Run Enabled:bool"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/8470f76b-a4c5-4b79-9651-5af1b9ed8b78",
+    "uuid": "8470f76b-a4c5-4b79-9651-5af1b9ed8b78",
+    "availability": "Rooms V2 only",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs."
+   }
+  },
+  "Projectile Launcher Get Projectile Lifetime": {
+   "id": "projectilelaunchergetprojectilelifetime",
+   "label": "Projectile Launcher Get Projectile Lifetime",
+   "kind": "chip",
+   "cat": [
+    "Object",
+    "Projectile Launcher"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Target:projectile launcher"
+     ],
+     "out": [
+      "Lifetime:float"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/7af08c60-bd52-4733-9a9a-c22317f28738",
+    "uuid": "7af08c60-bd52-4733-9a9a-c22317f28738",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Projectile Launcher Get Projectile Count.",
+    "similar": "Projectile Launcher Get Projectile Count"
+   }
+  },
+  "Projectile Launcher Get Projectile Speed": {
+   "id": "projectilelaunchergetprojectilespeed",
+   "label": "Projectile Launcher Get Projectile Speed",
+   "kind": "chip",
+   "cat": [
+    "Object",
+    "Projectile Launcher"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "Target:projectile launcher"
+     ],
+     "out": [
+      "Speed:float"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/1803843e-4e3b-4422-ada9-5f8959337ee5",
+    "uuid": "1803843e-4e3b-4422-ada9-5f8959337ee5",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Projectile Launcher Get Projectile Spread.",
+    "similar": "Projectile Launcher Get Projectile Spread"
+   }
+  },
+  "Projectile Launcher Set Projectile Lifetime": {
+   "id": "projectilelaunchersetprojectilelifetime",
+   "label": "Projectile Launcher Set Projectile Lifetime",
+   "kind": "chip",
+   "cat": [
+    "Object",
+    "Projectile Launcher"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:projectile launcher",
+      "Lifetime:float"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/b91d3e3d-7c6b-4fba-9505-66c8afd0245d",
+    "uuid": "b91d3e3d-7c6b-4fba-9505-66c8afd0245d",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Projectile Launcher Set Projectile Count.",
+    "similar": "Projectile Launcher Set Projectile Count"
+   }
+  },
+  "Projectile Launcher Set Projectile Speed": {
+   "id": "projectilelaunchersetprojectilespeed",
+   "label": "Projectile Launcher Set Projectile Speed",
+   "kind": "chip",
+   "cat": [
+    "Object",
+    "Projectile Launcher"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:projectile launcher",
+      "Speed:float"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/01cf75ba-b056-4226-b646-84fee1b7c9aa",
+    "uuid": "01cf75ba-b056-4226-b646-84fee1b7c9aa",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Projectile Launcher Set Projectile Spread.",
+    "similar": "Projectile Launcher Set Projectile Spread"
+   }
+  },
+  "Set Game HUD Element Color": {
+   "id": "setgamehudelementcolor",
+   "label": "Set Game HUD Element Color",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud constant",
+      "Color:color"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/47f61ea8-aab2-4b0e-8d59-351c0047d853",
+    "uuid": "47f61ea8-aab2-4b0e-8d59-351c0047d853",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Set HUD Element Color.",
+    "similar": "Set HUD Element Color"
+   }
+  },
+  "Set Game HUD Element Label": {
+   "id": "setgamehudelementlabel",
+   "label": "Set Game HUD Element Label",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud constant",
+      "Label:string"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/04fb09fa-5be2-491b-9d16-d5b21083f528",
+    "uuid": "04fb09fa-5be2-491b-9d16-d5b21083f528",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Set HUD Element Label.",
+    "similar": "Set HUD Element Label"
+   }
+  },
+  "Set Game HUD Element Label Enabled": {
+   "id": "setgamehudelementlabelenabled",
+   "label": "Set Game HUD Element Label Enabled",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud constant",
+      "Enabled:bool"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/2231d8fa-fa63-4952-8ba4-a8258ffb2f9b",
+    "uuid": "2231d8fa-fa63-4952-8ba4-a8258ffb2f9b",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Set HUD Element Label Enabled.",
+    "similar": "Set HUD Element Label Enabled"
+   }
+  },
+  "Set Game HUD Element Max Value": {
+   "id": "setgamehudelementmaxvalue",
+   "label": "Set Game HUD Element Max Value",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud constant",
+      "Value:int"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/f258d689-3341-4383-a8f1-73ab7b2f37a1",
+    "uuid": "f258d689-3341-4383-a8f1-73ab7b2f37a1",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Set HUD Element Max Value.",
+    "similar": "Set HUD Element Max Value"
+   }
+  },
+  "Set Game HUD Element Value": {
+   "id": "setgamehudelementvalue",
+   "label": "Set Game HUD Element Value",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud constant",
+      "Value:int"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/61efbc78-9ddf-42bb-814a-3758a34f5faf",
+    "uuid": "61efbc78-9ddf-42bb-814a-3758a34f5faf",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Set HUD Element Value.",
+    "similar": "Set HUD Element Value"
+   }
+  },
+  "Set Game HUD Element Value Text Enabled": {
+   "id": "setgamehudelementvaluetextenabled",
+   "label": "Set Game HUD Element Value Text Enabled",
+   "kind": "chip",
+   "cat": [
+    "Player",
+    "UI",
+    "HUD"
+   ],
+   "desc": "",
+   "flags": [],
+   "sections": [
+    {
+     "name": "",
+     "in": [
+      "_:exec",
+      "Target:hud constant",
+      "Enabled:bool"
+     ],
+     "out": [
+      "_:exec"
+     ]
+    }
+   ],
+   "prov": {
+    "source": "circuits.pages.dev",
+    "url": "https://circuits.pages.dev/docs/chips/a980fe11-65d0-4ae2-bd4c-6405cfc01ce0",
+    "uuid": "a980fe11-65d0-4ae2-bd4c-6405cfc01ce0",
+    "availability": "Available everywhere",
+    "note": "Not in the local CV2 dumps; ports copied from the community chip docs. Similar local chip: Set HUD Element Value Text Enabled.",
+    "similar": "Set HUD Element Value Text Enabled"
+   }
+  }
+ }
+}

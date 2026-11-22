@@ -1,0 +1,18 @@
+{
+  "v": 1,
+  "title": "Sliding door with a welcome ping",
+  "notes": "One event has to drive two chips, so a Sequence splits it: branch 1 shows the notification, branch 2 plays the piston. Parent the Piston board to the door panel and set Max Distance in game to the door width.",
+  "nodes": [
+    { "id": "zone", "chip": "Trigger Volume", "label": "Doorway zone" },
+    { "id": "seq", "chip": "Sequence", "label": "Split the event" },
+    { "id": "ping", "chip": "Show Notification", "label": "Welcome ping", "values": { "Value": "The door is opening" } },
+    { "id": "gate", "chip": "Piston", "label": "Door panel" }
+  ],
+  "links": [
+    ["zone.Player Entered", "seq._"],
+    ["seq.1", "ping._"],
+    ["seq.2", "gate.Play"],
+    ["zone.Player Exited", "gate.Stop"]
+  ],
+  "auto": false
+}

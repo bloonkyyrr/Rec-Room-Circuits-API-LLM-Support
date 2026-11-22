@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pckydev.github.io/Rec-Room-Circuits-API/api/circuits/schema.json",
+  "title": "Rec Room CV2 wiring plan",
+  "description": "A name-addressed circuit document. Compiled by assets/js/Modules/circuit.mjs and drawn by builder.html. This is a wiring plan, not a game export.",
+  "type": "object",
+  "required": ["nodes"],
+  "additionalProperties": true,
+  "properties": {
+    "v": { "type": "integer", "const": 1 },
+    "title": { "type": "string", "maxLength": 120 },
+    "notes": { "type": "string", "maxLength": 600 },
+    "auto": {
+      "type": "boolean",
+      "default": true,
+      "description": "Let the compiler fill in exec chains and same-name data wires."
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": {
+        "oneOf": [
+          { "type": "string", "description": "Chip name, when a single instance is enough." },
+          {
+            "type": "object",
+            "required": ["chip"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "pattern": "^[A-Za-z0-9_]+$" },
+              "chip": { "type": "string", "description": "Exact chip or object-board name from chips.index.json." },
+              "label": { "type": "string", "description": "Caption shown above the chip in the plan." },
+              "values": {
+                "type": "object",
+                "description": "Literals to type into unconnected input ports, keyed by port name. Use \"Value#2\" for the second port of that name.",
+                "additionalProperties": { "type": ["string", "number", "boolean"] }
+              },
+              "at": {
+                "type": "array",
+                "items": { "type": "number" },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "Hand-placed position. Supply it on every node or on none."
+              }
+            }
+          }
+        ]
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 2,
+            "maxItems": 2,
+            "description": "[\"nodeId.output\", \"nodeId.input\"] — output first."
+          },
+          {
+            "type": "object",
+            "required": ["from", "to"],
+            "additionalProperties": false,
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

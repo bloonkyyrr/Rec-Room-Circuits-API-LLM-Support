@@ -1,0 +1,32 @@
+# Rec Room Circuits API & Builder
+
+> Chip and object-board data for Rec Room Circuits V2, a JS API for reading and rendering it,
+> and a Circuit Builder that turns a description into a wiring plan drawn in the browser.
+> The builder does not modify a room: it produces a diagram and a checklist a maker follows
+> by hand in game.
+
+## Start here
+
+- [LLM skill](skill/SKILL.md): how to turn a request into a valid circuit document. Read this first.
+- [Chip index](api/circuits/chips.index.json): 1328 chips and 46 object boards with every port
+  name and type. ~505 KB — search it, do not read it whole.
+- [Circuit schema](api/circuits/schema.json): JSON Schema for the circuit document.
+- [Example plan](api/circuits/examples/sliding-door.circuit.json): a trigger volume, a sequence,
+  a notification and a piston.
+
+## Render a plan
+
+- `builder.html?doc=<path-or-inline-json>` renders a circuit document.
+- `builder.html?recipe=timed-door` renders a built-in pattern.
+- `builder.html` alone is the page with prompt, pattern buttons and JSON input.
+
+## Data
+
+- [Raw chip dump](../Circuits%20Data/CV2_ChipConfigs.json): exporter output, ~2.5 MB.
+- [Raw object dump](../Circuits%20Data/CV2_ObjectConfigs.json): object boards, ~170 KB.
+
+## Limits
+
+Placement, parenting, board scope and asset ports (Audio, Texture, Reward…) are not modelled —
+the skill lists all of it in section 5. Use `notes` to say what the maker must set up around the
+circuit.

@@ -1,0 +1,9 @@
+{
+  "excludes": [
+    "*.min.js",
+    "*.min.css",
+    "bootstrap/*",
+    "swiper*"
+  ],
+  "gitignore": true
+}

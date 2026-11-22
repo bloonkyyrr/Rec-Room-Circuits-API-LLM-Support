@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&height=100&color=0:d97028,100:d93e27&text=Rec%20Room&section=header&reversal=false&animation=fadeIn&fontColor=eae8e4&desc=Circuits%20API%20and%20Graph%20Editor&descSize=25&fontAlignY=60&descAlignY=85">
+  <img src="https://capsule-render.vercel.app/api?type=soft&height=100&color=0:d97028,100:d93e27&text=Rec%20Room&section=header&reversal=false&animation=fadeIn&fontColor=eae8e4&desc=Circuits%20API%20and%20Circuit%20Builder&descSize=25&fontAlignY=60&descAlignY=85">
 </p>
 
 <p align="center">
@@ -7,12 +7,130 @@
 </p>
 
 <p align="center">
-	A comprehensive API and graph editor for Rec Room's Circuits V2, featuring detailed data on chips and object boards, as well as a visual graph editor for creating circuit layouts.
+	Circuit data, a chip renderer, a graph editor and a circuit builder for Rec Room's Circuits V2 — described in plain language, drawn in the browser, wired by hand in game.
 </p>
 
 ---
 
+## What's in here
+
+| | |
+| --- | --- |
+| **[Circuit Builder](https://pckydev.github.io/Rec-Room-Circuits-API/builder.html)** — `Source/builder.html` | Describe a circuit, get the chips to place, every wire in order with both port names, and the values to type in. |
+| **Chip index** — `Source/api/circuits/chips.index.json` | 1358 chips and object boards with every port's name and type. Small enough for a model to hold, complete enough to compile against. |
+| **Skill for agents** — `Source/skill/SKILL.md` | The circuit document format, port addressing and wire rules, for an LLM writing circuits. |
+| **MCP server** — `Tools/mcp/server.mjs` | The same thing over [MCP](https://modelcontextprotocol.io): search, compose, repair and preview, driven by an agent. |
+| **Graph editor** — `Source/index.html` | The original palette + graph editor with the full chip renderer. |
+| **Data** — `Circuits Data/` | The raw exporter dumps, plus chips added since they were exported. |
+| **Tools** — `Tools/*.py` | Rebuild the index; diff it against the community chip docs. |
+
+Nothing here imports anything into Rec Room. The output is a diagram and a checklist — you place the
+chips and pull the wires yourself, in game.
+
+## Circuit Builder
+
+Describe a circuit in plain language ("a door that slides open when a player walks up") and the
+builder turns it into a **wiring plan**: the chips to place, every wire in order with both port
+names, and the values to type in. It draws the chips in the browser, so you can read the plan and
+rebuild it by hand in Rec Room.
+
+There are four ways in, all on the same page:
+
+- type a prompt and press **Generate** (eight built-in patterns answer instantly, offline);
+- `?recipe=timed-door` — open one of the patterns by id;
+- `?doc=<json>` — an inline document, or a path/URL ending in `.json`;
+- `?prompt=...` — pre-fill the prompt box.
+
+A circuit document is name-addressed: chips by palette name, ports by their in-game names. No ids,
+no indices.
+
+```json
+{
+  "title": "Sliding door with a welcome ping",
+  "nodes": [
+    { "id": "zone", "chip": "Trigger Volume", "label": "Doorway zone" },
+    { "id": "seq",  "chip": "Sequence", "label": "Split the event" },
+    { "id": "ping", "chip": "Show Notification", "values": { "Value": "The door is opening" } },
+    { "id": "gate", "chip": "Piston", "label": "Door panel" }
+  ],
+  "links": [
+    ["zone.Player Entered", "seq._"],
+    ["seq.1", "ping._"],
+    ["seq.2", "gate.Play"],
+    ["zone.Player Exited", "gate.Stop"]
+  ]
+}
+```
+
+Ports are written `nodeId.portName`, with the section name for object boards
+(`zone.Player Entered`, `gate.Set Locked`), `_` for an unnamed exec port, `#2` or `out2` for a second
+port with the same name. Auto-connect fills in an exec chain and matching data names, and never
+guesses harder than that — a wrong wire that compiles is worse than none.
+
+The page is static, so serve the folder (or use GitHub Pages) and open `builder.html`:
+
+```bash
+cd Source
+python -m http.server 8899      # http://127.0.0.1:8899/builder.html
+```
+
+It needs `http://` — `file://` blocks the module imports and the index fetch.
+
+## MCP server
+
+`Tools/mcp/server.mjs` speaks MCP over stdio so an agent can do the whole loop itself: search the
+chip index, compose a circuit from a sentence, repair what does not compile, and hand back a URL
+that draws it. Node 18+, no dependencies, nothing to install.
+
+```json
+{
+  "mcpServers": {
+    "rec-room-circuits": {
+      "command": "node",
+      "args": ["<path-to-repo>/Tools/mcp/server.mjs"]
+    }
+  }
+}
+```
+
+| Tool | What it does |
+| --- | --- |
+| `search_chips` | Find chips by name, description or category |
+| `get_chip` | Every section, input and output of one chip, with types |
+| `list_recipes` | The eight offline patterns |
+| `build_circuit` | Prompt or document → plan, document and preview URL |
+| `validate_circuit` | Compile and report every error and warning |
+| `repair_circuit` | Fix a rough document and say what changed |
+| `preview_circuit` | Just the preview URL |
+
+`build_circuit` also starts a loopback-only static server for the Builder page, so the preview URL
+works as soon as it is returned. The full reference is in [`Tools/mcp/README.md`](Tools/mcp/README.md).
+
+## Chip data and the index
+
+`Circuits Data/CV2_ChipConfigs.json` and `CV2_ObjectConfigs.json` are exporter dumps — about 2.5 MB,
+with far more detail than a model or a page needs. `Source/api/circuits/chips.index.json` is the
+trimmed, LLM-facing version: name, category, short description, true flags, and each section's
+ports as `"Name:Type"`.
+
+Chips added to the game after the dumps were exported are documented on
+[circuits.pages.dev](https://circuits.pages.dev/docs/category/chips).
+`Tools/build_docs_supplement.py` diffs that site against the dumps and writes
+`Circuits Data/CV2_Docs_Supplement.json`; `Tools/build_chip_index.py` merges it in, marking those
+entries with a `prov` field and a `similar` hint when an older local chip has a near-identical name.
+
+After a game update:
+
+```bash
+python Tools/build_docs_supplement.py    # crawl the docs, write the supplement
+python Tools/build_chip_index.py         # rebuild Source/api/circuits/chips.index.json
+```
+
+Both are plain Python 3 (3.10+) with no dependencies. `--report` on the first one only prints the
+diff; `--refresh` ignores the page cache.
+
 ## Circuits API
+
 The Circuits API provides access to detailed information about Rec Room's Circuits V2, including data on chips and object boards. The API is designed to be easy to use and integrate into your projects, allowing you to retrieve information about chips, object boards, and their properties. And even allows you to render a visual representation of a chip or object board in HTML and CSS!
 
 ## Prerequisites

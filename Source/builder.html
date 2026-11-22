@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Circuit Builder - Rec Room CV2</title>
+    <meta name="theme-color" content="#383b43">
+    <link rel="canonical" href="https://pckydev.github.io/Rec-Room-Circuits-API/builder.html">
+    <meta name="description" content="Describe a Rec Room Circuits V2 circuit and get a wiring plan you can rebuild by hand: chips, ports and every wire, drawn in the browser.">
+    <meta property="og:url" content="https://pckydev.github.io/Rec-Room-Circuits-API/builder.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Circuit Builder - Rec Room CV2">
+    <meta property="og:description" content="Describe a circuit, get a wiring plan you can rebuild by hand in Rec Room.">
+    <meta property="og:image" content="https://pckydev.github.io/Rec-Room-Circuits-API/assets/img/Branding/Banner/OpenGraph.png">
+    <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/Branding/Icon/Icon%201K%20Transparent.png">
+    <link rel="stylesheet" href="assets/css/Roboto.css">
+    <link rel="stylesheet" href="assets/css/Chip/chip-layout.css">
+    <link rel="stylesheet" href="assets/css/Chip/chip-versions.css">
+    <link rel="stylesheet" href="assets/css/Chip/port-colors.css">
+    <link rel="stylesheet" href="assets/css/Chip/port-sizes.css">
+    <link rel="stylesheet" href="assets/css/Chip/port-versions.css">
+    <link rel="stylesheet" href="assets/css/Pages/Builder/builder.css">
+</head>
+
+<body>
+    <header class="b-top">
+        <a class="b-brand" href="./index.html">Rec Room <span>Circuits</span> Builder</a>
+        <p class="b-tag">Describe it · read the plan · wire it in game</p>
+        <nav class="b-nav">
+            <a href="./editor.html">Editor</a>
+            <a href="./api/circuits/chips.index.json">Chip index</a>
+            <a href="./skill/SKILL.md">LLM skill</a>
+        </nav>
+    </header>
+
+    <main class="b-main">
+        <section class="b-input">
+            <label class="b-label" for="prompt">What should the circuit do?</label>
+            <textarea id="prompt" class="b-textarea" rows="3"
+                placeholder="a door that slides open when a player walks up"></textarea>
+            <div class="b-row">
+                <button id="generate" class="b-btn b-btn-primary" type="button">Generate plan</button>
+                <button id="copy-prompt" class="b-btn" type="button">Copy prompt for an LLM</button>
+            </div>
+
+            <p class="b-hint" id="examples-label">Or start from a pattern:</p>
+            <div id="examples" class="b-examples"></div>
+
+            <div id="llm" class="b-llm" hidden>
+                <div class="b-llm-head">
+                    <strong>No offline pattern matches that.</strong>
+                    <span>Copy this, answer it with any model, paste the JSON back below.</span>
+                </div>
+                <textarea id="llm-prompt" class="b-textarea b-mono" rows="10" spellcheck="false" readonly></textarea>
+                <div class="b-row">
+                    <button id="copy-llm" class="b-btn" type="button">Copy</button>
+                </div>
+            </div>
+
+            <details class="b-json" id="json-wrap">
+                <summary>Circuit JSON <span id="json-state"></span></summary>
+                <textarea id="doc" class="b-textarea b-mono" rows="12" spellcheck="false"
+                    placeholder="Paste a circuit document here"></textarea>
+                <div class="b-row">
+                    <button id="build" class="b-btn" type="button">Build from JSON</button>
+                    <button id="download" class="b-btn" type="button">Download .circuit.json</button>
+                </div>
+            </details>
+        </section>
+
+        <section class="b-output">
+            <div id="plan-head" class="b-plan-head"></div>
+            <div id="plan" class="b-plan">
+                <p class="b-empty">Describe a circuit, pick a pattern, or paste JSON to see the wiring plan.</p>
+            </div>
+            <div class="b-tabs" id="tabs">
+                <button class="b-tab is-active" data-tab="steps" type="button">Wire it up</button>
+                <button class="b-tab" data-tab="diag" type="button">Diagnostics <span id="diag-count"></span></button>
+            </div>
+            <div id="steps" class="b-panel"></div>
+            <div id="diag" class="b-panel" hidden></div>
+        </section>
+    </main>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/Pages/Builder/builder.mjs" type="module"></script>
+</body>
+
+</html>
